@@ -31,6 +31,8 @@ function operate(operator, num1, num2) {
     }
     else if (operator == "/") {
         return divide(num1, num2);
+    } else {
+        return num2; // return the second number if no operator is chosen
     }
 }
 
@@ -41,18 +43,33 @@ function clearDisplay() {
     }
 }
 
-let number, operator;
+// sets variables to default values
+function resetVariables() {
+    number = "";
+    operator = "";
+    result = null
+    operatorChosen = false;
+    digits = [];
+    numbers = [];
+}
+
+// variables
+let number = ""; // holds current number before adding to array
+let operator = "";
+let result = null;
 let digits = []; // digits for number on display
 let numbers = []; // array to hold two numbers
-let operatorChosen; // key to decide if an operator has been chosen
+let operatorChosen = false; // key to decide if an operator has been chosen
 
+// create element to store display item
 const display = document.querySelector(".display");
+const displayItem = document.createElement("div");
 
 // create "click" event listener for each button
 const buttons = document.querySelectorAll("button");
+
 buttons.forEach(button => {
     button.addEventListener("click", () => {
-        const displayItem = document.createElement("div");
         const buttonContent = button.textContent;
 
         // runs if buttonContent is a number
@@ -76,39 +93,36 @@ buttons.forEach(button => {
         // runs if clear button is clicked (resets all variables)
         else if (buttonContent == "AC") {
             clearDisplay();
-            operatorChosen = false;
-            digits = [];
-            numbers = [];
+            resetVariables();
         }
 
-        // runs if an operator or equals sign is clicked
-        else {
+        // runs if equals button is clicked
+        else if (buttonContent == "=") {
+            // add current number to array
+            numbers.push(parseInt(number));
+            console.log(numbers) //TEST
 
-            if (buttonContent != "=") {
-                operator = buttonContent;
-                operatorChosen = true;
-            }
-
-            else {
-                clearDisplay()
-            }
-
-            numbers.push(number); // adds current number to array
-            digits = [];
-            console.log(numbers) //test
-
-            // runs only if two numbers have been chosen
+            // check if two numbers are chosen
             if (numbers.length == 2) {
-                let result = operate(operator, parseInt(numbers[0]), parseInt(numbers[1]));
+                clearDisplay();
+                result = operate(operator, numbers[0], numbers[1]);
+                console.log(result) //TEST
+                numbers[0] = result;
                 displayItem.textContent = result; // sets text content of display to be result
                 display.appendChild(displayItem);
+                resetVariables();
             }
-            
+        }
+
+        // runs if an operator is clicked
+        else {
+            operator = buttonContent;
+            operatorChosen = true;
+
+            // add current number to array
+            numbers.push(parseInt(number)); // adds current number to array
+            digits = [];
+            console.log(numbers) //TEST
         }
     })
 })
-
-
-
-
-
