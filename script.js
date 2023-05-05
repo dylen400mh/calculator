@@ -22,17 +22,49 @@ function divide(a, b) {
 function operate(operator, num1, num2) {
     if (operator == "+") {
         add(num1, num2);
-    } 
+    }
     else if (operator == "-") {
         subtract(num1, num2);
-    } 
+    }
     else if (operator == "*") {
         multiply(num1, num2);
-    } 
+    }
     else if (operator == "/") {
         divide(num1, num2);
     }
 }
 
 let num1, num2, operator;
+
+const display = document.querySelector(".display");
+
+// create "click" event listener for each button
+const buttons = document.querySelectorAll("button");
+buttons.forEach(button => {button.addEventListener("click", () => {
+    const displayItem = document.createElement("div");
+    const buttonContent = button.textContent;
+
+    // runs if buttonContent is a number
+    if (!isNaN(buttonContent)) {
+
+        clearDisplay();
+
+        displayItem.textContent = buttonContent; // add new number
+        display.appendChild(displayItem)
+    }
+
+    else if (buttonContent == "AC") {
+        clearDisplay();
+    }
+})})
+
+// clear display
+function clearDisplay() {
+    if (display.firstChild) {
+        display.removeChild(display.firstChild)
+    }
+}
+
+
+
 
