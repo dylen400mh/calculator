@@ -34,36 +34,64 @@ function operate(operator, num1, num2) {
     }
 }
 
+// clear display
+function clearDisplay() {
+    while (display.firstChild) {
+        display.removeChild(display.firstChild)
+    }
+}
+
 let num1, num2, operator;
+let digits = []; // digits for number on display
+let operatorChosen; // key to decide if an operator has been chosen
 
 const display = document.querySelector(".display");
 
 // create "click" event listener for each button
 const buttons = document.querySelectorAll("button");
-buttons.forEach(button => {button.addEventListener("click", () => {
-    const displayItem = document.createElement("div");
-    const buttonContent = button.textContent;
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        const displayItem = document.createElement("div");
+        const buttonContent = button.textContent;
 
-    // runs if buttonContent is a number
-    if (!isNaN(buttonContent)) {
+        // runs if buttonContent is a number
+        if (!isNaN(buttonContent)) {
 
-        clearDisplay();
+            // clears digits if operator is chosen
+            if (operatorChosen) {
+                digits = [];
+                operatorChosen = false;
+            }
 
-        displayItem.textContent = buttonContent; // add new number
-        display.appendChild(displayItem)
-    }
+            // clears display for new number
+            clearDisplay();
 
-    else if (buttonContent == "AC") {
-        clearDisplay();
-    }
-})})
+            digits.push(buttonContent)
+            let number = digits.join("");
+            displayItem.textContent = number; // add new number
+            display.appendChild(displayItem);
+        }
 
-// clear display
-function clearDisplay() {
-    if (display.firstChild) {
-        display.removeChild(display.firstChild)
-    }
-}
+        // runs if clear button is clicked
+        else if (buttonContent == "AC") {
+            clearDisplay();
+            operatorChosen = false;
+            digits = [];
+        }
+
+        // runs if equals button is clicked
+        else if (buttonContent == "=") {
+            operate(operator, num1, num2);
+        }
+
+        // runs if an operator is clicked
+        else {
+            operator = buttonContent;
+            operatorChosen = true;
+        }
+    })
+})
+
 
 
 
