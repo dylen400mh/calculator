@@ -1,39 +1,20 @@
-// add two numbers
-function add(a, b) {
-    return a + b;
-}
-
-// subtract two numbers
-function subtract(a, b) {
-    return a - b;
-}
-
-// multiply two numbers
-function multiply(a, b) {
-    return a * b;
-}
-
-// divide two numbers
-function divide(a, b) {
-    return a / b;
-}
-
 // takes an operator and 2 numbers and then calls one of the above functions on the numbers.
-function operate(operator, num1, num2) {
-
-    if (operator == "+") {
-        return add(num1, num2);
-    }
-    else if (operator == "-") {
-        return subtract(num1, num2);
-    }
-    else if (operator == "*") {
-        return multiply(num1, num2);
-    }
-    else if (operator == "/") {
-        return divide(num1, num2);
-    } else {
-        return num1; // if there is no operator, just return the first number
+function operate(operator, a, b) {
+    switch (operator) {
+        case "+":
+            return a + b;
+            break;
+        case "-":
+            return a - b;
+            break;
+        case "*":
+            return a * b;
+            break;
+        case "/":
+            return a / b;
+            break;
+        default:
+            return a; // if there is no operator, just return the first number
     }
 }
 
@@ -140,4 +121,4 @@ buttons.forEach(button => {
 // BUGS
 
 
-// Clicking equals multiple times does not update result as it should. (Ex. does not increment if you added something originally)
+// Clicking equals multiple times does not update result as it should. (Ex. does not increment if you added something)
