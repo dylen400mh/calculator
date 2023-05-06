@@ -20,6 +20,7 @@ function divide(a, b) {
 
 // takes an operator and 2 numbers and then calls one of the above functions on the numbers.
 function operate(operator, num1, num2) {
+    
     if (operator == "+") {
         return add(num1, num2);
     }
@@ -32,13 +33,13 @@ function operate(operator, num1, num2) {
     else if (operator == "/") {
         return divide(num1, num2);
     } else {
-        return num2; // return the second number if no operator is chosen
+        return num1; // if there is no operator, just return the first number
     }
 }
 
 // clear display
 function clearDisplay() {
-    displayItem.textContent = "";
+    displayItem.textContent = 0;
 }
 
 // sets variables to default values
@@ -56,12 +57,14 @@ let number = ""; // holds current number before adding to array
 let operator = "";
 let result = null;
 let digits = []; // digits for number on display
-let numbers = []; // array to hold two numbers
+let numbers = []; // array to hold numbers
 let operatorChosen = false; // key to decide if an operator has been chosen
 
 // create element to store display item
 const display = document.querySelector(".display");
 const displayItem = document.createElement("div");
+displayItem.textContent = 0; // starts as 0
+display.appendChild(displayItem);
 
 // create "click" event listener for each button
 const buttons = document.querySelectorAll("button");
@@ -82,7 +85,6 @@ buttons.forEach(button => {
             digits.push(buttonContent)
             number = digits.join("");
             displayItem.textContent = number; // add new number
-            display.appendChild(displayItem);
         }
 
         // runs if clear button is clicked (resets all variables)
@@ -93,8 +95,15 @@ buttons.forEach(button => {
 
         // runs if equals button is clicked
         else if (buttonContent == "=") {
+
             // add current number to array
             numbers.push(parseInt(number));
+
+            // if only one number chosen, set second number to 0
+            if (numbers.length == 1) {
+                numbers.push(0);
+            }
+
             console.log(numbers) //TEST
 
             // check if two numbers are chosen
@@ -102,10 +111,11 @@ buttons.forEach(button => {
                 clearDisplay();
                 result = operate(operator, numbers[0], numbers[1]);
                 console.log(result) //TEST
-                numbers[0] = result;
+                
                 displayItem.textContent = result; // sets text content of display to be result
                 display.appendChild(displayItem);
                 resetVariables();
+                numbers.push(result);
             }
         }
 
@@ -128,6 +138,6 @@ buttons.forEach(button => {
 
 // BUGS
 
-// 1. if number is clicked, then equals, set second number to 0
+
 // 2. after calculating a result, set the value as the first number to the next operation
 // 3. allow multiple operations to be performed at once before calculating result
