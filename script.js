@@ -1,4 +1,4 @@
-// takes an operator and 2 numbers and then calls one of the above functions on the numbers.
+// takes an operator and 2 numbers and performs the appropriate operation
 function operate(operator, a, b) {
     switch (operator) {
         case "+":
