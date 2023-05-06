@@ -20,7 +20,7 @@ function divide(a, b) {
 
 // takes an operator and 2 numbers and then calls one of the above functions on the numbers.
 function operate(operator, num1, num2) {
-    
+
     if (operator == "+") {
         return add(num1, num2);
     }
@@ -59,6 +59,7 @@ let result = null;
 let digits = []; // digits for number on display
 let numbers = []; // array to hold numbers
 let operatorChosen = false; // key to decide if an operator has been chosen
+let temp = null; // used to store result for later calculations
 
 // create element to store display item
 const display = document.querySelector(".display");
@@ -75,6 +76,7 @@ buttons.forEach(button => {
 
         // runs if buttonContent is a number
         if (!isNaN(buttonContent)) {
+            temp = null; // temp variable must be set to null if a new calculation is happening
 
             // clears digits if operator is chosen
             if (operatorChosen) {
@@ -90,6 +92,7 @@ buttons.forEach(button => {
         // runs if clear button is clicked (resets all variables)
         else if (buttonContent == "AC") {
             clearDisplay();
+            temp = null;
             resetVariables();
         }
 
@@ -111,11 +114,11 @@ buttons.forEach(button => {
                 clearDisplay();
                 result = operate(operator, numbers[0], numbers[1]);
                 console.log(result) //TEST
-                
+
                 displayItem.textContent = result; // sets text content of display to be result
                 display.appendChild(displayItem);
+                temp = result // temp variable to hold result
                 resetVariables();
-                numbers.push(result);
             }
         }
 
@@ -124,7 +127,9 @@ buttons.forEach(button => {
             operator = buttonContent;
             operatorChosen = true;
 
-            if (digits.length == 0) {
+            if (temp != null) {
+                numbers.push(temp);
+            } else if (digits.length == 0) {
                 numbers.push(0); // add 0 if an operator is clicked first
             } else {
                 numbers.push(parseInt(number)); // adds current number to array
@@ -141,3 +146,4 @@ buttons.forEach(button => {
 
 // 2. after calculating a result, set the value as the first number to the next operation
 // 3. allow multiple operations to be performed at once before calculating result
+// 4. clicking equals multiple times leads to NaN
