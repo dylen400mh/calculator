@@ -140,4 +140,4 @@ buttons.forEach(button => {
 // BUGS
 
 
-// 4. clicking equals multiple times leads to NaN
+// Clicking equals multiple times does not update result as it should. (Ex. does not increment if you added something originally)
