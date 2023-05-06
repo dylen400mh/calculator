@@ -55,7 +55,7 @@ buttons.forEach(button => {
         if (!isNaN(buttonContent)) {
 
             // We need to clear numbers array if user enters a number immediately after a calculation 
-            if (!["+","-","*","/"].includes(operator)) {
+            if (!["+", "-", "*", "/"].includes(operator)) {
                 numbers = [];
             }
 
@@ -83,14 +83,12 @@ buttons.forEach(button => {
                 if (numbers.length == 1) {
                     numbers.push(0);
                 }
-                console.log(numbers)
             }
 
             // runs if an operator is clicked
             else {
                 if (digits.length == 0) {
                     numbers.push(0); // add 0 if an operator is clicked first
-                    console.log(numbers)
                 }
 
                 // else just set the operator
@@ -98,7 +96,6 @@ buttons.forEach(button => {
                 else {
                     numbers.push(parseInt(number));
                     digits = [];
-                    console.log(numbers)
                 }
             }
 
@@ -108,17 +105,11 @@ buttons.forEach(button => {
                 displayItem.textContent = result;
                 resetVariables();
                 numbers[0] = result;
-                console.log(result)
-                console.log(numbers)
                 result = null;
             }
 
+            // set operator
             operator = buttonContent;
         }
     })
 })
-
-// BUGS
-
-
-// Clicking equals multiple times does not update result as it should. (Ex. does not increment if you added something)
