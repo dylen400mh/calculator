@@ -38,9 +38,7 @@ function operate(operator, num1, num2) {
 
 // clear display
 function clearDisplay() {
-    while (display.firstChild) {
-        display.removeChild(display.firstChild)
-    }
+    displayItem.textContent = "";
 }
 
 // sets variables to default values
@@ -81,9 +79,6 @@ buttons.forEach(button => {
                 operatorChosen = false;
             }
 
-            // clears display for new number
-            clearDisplay();
-
             digits.push(buttonContent)
             number = digits.join("");
             displayItem.textContent = number; // add new number
@@ -119,10 +114,20 @@ buttons.forEach(button => {
             operator = buttonContent;
             operatorChosen = true;
 
-            // add current number to array
-            numbers.push(parseInt(number)); // adds current number to array
-            digits = [];
+            if (digits.length == 0) {
+                numbers.push(0); // add 0 if an operator is clicked first
+            } else {
+                numbers.push(parseInt(number)); // adds current number to array
+                digits = [];
+            }
+
             console.log(numbers) //TEST
         }
     })
 })
+
+// BUGS
+
+// 1. if number is clicked, then equals, set second number to 0
+// 2. after calculating a result, set the value as the first number to the next operation
+// 3. allow multiple operations to be performed at once before calculating result
