@@ -2,6 +2,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 }
 
 .calculator {
@@ -35,6 +36,5 @@ body {
 button {
     width: 112.5px;
     height: 112.5px;
-    margin-bottom: 10px;
-    
+    margin-bottom: 10px; 
 }
