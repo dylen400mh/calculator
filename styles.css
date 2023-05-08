@@ -1,7 +1,40 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .calculator {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
+    border: 5px solid black;
+
+}
+
+.display {
+    width: 500px;
+    height: 100px;
+    line-height: 100px;
+    text-align: right;
+    font-size: 50px;
+    padding-right: 25px;
+    border-bottom: 5px solid black;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    justify-content: space-between;
+    margin-top: 10px; 
+}
+
+button {
+    width: 112.5px;
+    height: 112.5px;
+    margin-bottom: 10px;
+    
 }
