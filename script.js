@@ -48,6 +48,23 @@ display.appendChild(displayItem);
 const buttons = document.querySelectorAll("button");
 
 buttons.forEach(button => {
+
+    let backgroundColor = window.getComputedStyle(button).backgroundColor; // gets button's original background color
+    let textColor = window.getComputedStyle(button).color; // gets button's original text color
+
+    //hover event listeners
+    button.addEventListener("mouseover", () => {
+        button.style.backgroundColor = "white";
+        button.style.color = "black";
+    })
+
+    button.addEventListener("mouseout", () => {
+        button.style.backgroundColor = backgroundColor;
+        button.style.color = textColor;
+    })
+
+
+    // click event listeners
     button.addEventListener("click", () => {
         const buttonContent = button.textContent;
 
