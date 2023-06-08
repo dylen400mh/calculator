@@ -11,3 +11,4 @@ Add keyboard support
 Add a backspace button
 Add the option to enter decimals
 Ensure results are properly rounded to prevent long decimal numbers
+Fix NaN error when pressing equals first
